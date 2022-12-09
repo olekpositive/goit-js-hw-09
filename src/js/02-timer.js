@@ -8,7 +8,6 @@ const x = {
     timerHours: document.querySelector('[data-hours'),
     timerMinutes: document.querySelector('[data-minutes'),
     timerSeconds: document.querySelector('[data-seconds'),
- /*    timerInsertData: document.querySelector('input[type="text"]'), */
 };
 
 x.btnStart.disabled = true;

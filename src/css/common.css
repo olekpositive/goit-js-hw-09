@@ -14,8 +14,8 @@ body {
 
 /* Task #2  */
 
-#datetime-picker {
-    margin:10px 20px 20px 30px;
+input {
+    margin: 10px 20px 20px 30px;
     width: 230px;
     height: 40px;
 }
