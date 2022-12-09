@@ -2,20 +2,17 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const btnStart = document.querySelector('button[data-start]');
-const days = document.querySelector('[data-days');
-const hours = document.querySelector('[data-hours');
-const minutes = document.querySelector('[data-minutes');
-const seconds = document.querySelector('[data-seconds');
-const insertData = document.querySelector('input[type="text"]')
-let selectedTime = 0;
-let tempSelectionTime = 0;
+const x = {
+    btnStart: document.querySelector('[data-start]'),
+    timerDays: document.querySelector('[data-days'),
+    timerHours: document.querySelector('[data-hours'),
+    timerMinutes: document.querySelector('[data-minutes'),
+    timerSeconds: document.querySelector('[data-seconds'),
+ /*    timerInsertData: document.querySelector('input[type="text"]'), */
+};
 
-
-let currentTime = new Date;
-let convertTime = convertMs(currentTime.getTime());
-let statusInterval = false;
-
+x.btnStart.disabled = true;
+let timerId = null;
 
 const options = {
     enableTime: true,
@@ -23,20 +20,16 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        tempSelectionTime = selectedDates[0].getTime();
-        if (((tempSelectionTime - currentTime.getTime()) <= 0) && (statusInterval == true)) {
-            Notify.failure("Please choose a date in the future");
-        } else {
-            tempSelectionTime = selectedDates[0].getTime();
-            // const tempTime = convertMs(selectedTime)
-            if ((tempSelectionTime - currentTime.getTime()) <= 0) {
-                btnStart.setAttribute("disabled", true);
-                Notify.failure("Please choose a date in the future");
-                //window.alert("Please choose a date in the future");
-            } else {
-                btnStart.removeAttribute("disabled");
+        const currentDate = new Date();
 
-            }
+        if (selectedDates[0] - currentDate > 0) {
+            x.btnStart.disabled = false;
+        } else {
+            x.btnStart.disabled = true;
+            Notify.failure('Please choose a date in the future', {
+                timeout: 1500,
+                width: '400px',
+            });
         }
     },
 };
@@ -60,24 +53,33 @@ function convertMs(ms) {
     return { days, hours, minutes, seconds };
 }
 
-btnStart.addEventListener("click", () => {
-    btnStart.setAttribute("disabled", true);
-    insertData.setAttribute("disabled", true);
-    selectedTime = tempSelectionTime;
-    updateTime = setInterval(() => {
-        statusInterval = true;
-        currentTime = new Date;
-        convertTime = convertMs(selectedTime - currentTime.getTime());
+const fp = flatpickr('#datetime-picker', options);
 
-        days.textContent = (addLeadingZero(convertTime.days)).padStart();
-        hours.textContent = (addLeadingZero(convertTime.hours)).padStart();
-        minutes.textContent = (addLeadingZero(convertTime.minutes)).padStart();
-        seconds.textContent = (addLeadingZero(convertTime.seconds)).padStart();
-        // console.log(selectedTime - currentTime.getTime());
-        if ((selectedTime - currentTime.getTime()) <= 1000) {
-            clearInterval(updateTime);
-            statusInterval = false;
+function addLeadingZero(value) {
+    return String(value).padStart(2, 0);
+}
+
+function onTimerStart() {
+    const selectedDate = fp.selectedDates[0];
+
+    timerId = setInterval(() => {
+        const startTime = new Date();
+        const countdown = selectedDate - startTime;
+        x.btnStart.disabled = true;
+
+        if (countdown < 0) {
+            clearInterval(timerId);
+            return;
         }
+        updateTimerFace(convertMs(countdown));
     }, 1000);
+}
 
-});
+function updateTimerFace({ days, hours, minutes, seconds }) {
+    x.timerDays.textContent = addLeadingZero(days);
+    x.timerHours.textContent = addLeadingZero(hours);
+    x.timerMinutes.textContent = addLeadingZero(minutes);
+    x.timerSeconds.textContent = addLeadingZero(seconds);
+}
+
+x.btnStart.addEventListener('click', onTimerStart);
