@@ -12,10 +12,22 @@ body {
     line-height: 1.5;
 }
 
+/* Task #1  */
+[data-start],
+[data-stop] {
+    width: 150px;
+    height: 45px;
+
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+
 /* Task #2  */
 
 input {
-    margin: 10px 20px 20px 30px;
+    margin: 20px 20px 20px 30px;
     width: 230px;
     height: 40px;
 }
@@ -35,4 +47,57 @@ input {
 
 .label {
     display: table-row;
+}
+
+/* Task #3  */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form label {
+    margin-bottom: 10px;
+    padding: 5px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 400px;
+    height: 40px;
+
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    
+    background-color: rgba(252, 206, 1, 0.6);
+    border-radius: 5px;
+    border: none;
+    transition: 250ms;
+}
+
+.form input {
+    padding: 5px;
+    width: 180px;
+    height: 100%;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-align: right;
+    
+}
+.form button {
+    width: 400px;
+    height: 40px;
+
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-align: center;
+
+    background-color: rgba(5, 245, 17, 0.6);
+    border-radius: 5px;
+    border: 1px solid #3b3b3b;
+    cursor: pointer;
+    transition: 250ms;
 }
