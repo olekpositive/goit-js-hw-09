@@ -9,6 +9,7 @@ const x = {
     timerHours: document.querySelector('[data-hours'),
     timerMinutes: document.querySelector('[data-minutes'),
     timerSeconds: document.querySelector('[data-seconds'),
+    timerValue: document.querySelector('.value'),
 };
 
 x.btnStart.disabled = true;
@@ -84,5 +85,5 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 
 x.btnStart.addEventListener('click', onTimerStart);
 x.btnReset.addEventListener("click", () => {
-    onTimerStart.removeAttribute("disabled");
+    x.timerValue.reset();
 })
