@@ -84,6 +84,4 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 }
 
 x.btnStart.addEventListener('click', onTimerStart);
-x.btnReset.addEventListener("click", () => {
-    x.timerValue.reset();
-})
+x.btnReset.addEventListener("click", updateTimerFace);
