@@ -4,12 +4,14 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const x = {
     btnStart: document.querySelector('[data-start]'),
+    btnReset: document.querySelector('[data-reset]'),
     timerDays: document.querySelector('[data-days'),
     timerHours: document.querySelector('[data-hours'),
     timerMinutes: document.querySelector('[data-minutes'),
     timerSeconds: document.querySelector('[data-seconds'),
 };
 
+x.btnStart.disabled = true;
 x.btnStart.disabled = true;
 let timerId = null;
 
