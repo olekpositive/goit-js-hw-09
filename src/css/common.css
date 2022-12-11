@@ -26,6 +26,14 @@ body {
 
 /* Task #2  */
 
+[data-reset] {
+    width: 150px;
+    height: 45px;
+    
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
 input {
     margin: 20px 20px 20px 30px;
     width: 230px;

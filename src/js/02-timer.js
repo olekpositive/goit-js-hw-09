@@ -12,7 +12,7 @@ const x = {
 };
 
 x.btnStart.disabled = true;
-x.btnStart.disabled = true;
+x.btnReset.disabled = true;
 let timerId = null;
 
 const options = {
@@ -42,7 +42,6 @@ function convertMs(ms) {
     const hour = minute * 60;
     const day = hour * 24;
 
-    // Remaining days
     const days = Math.floor(ms / day);
     // Remaining hours
     const hours = Math.floor((ms % day) / hour);
@@ -50,7 +49,6 @@ function convertMs(ms) {
     const minutes = Math.floor(((ms % day) % hour) / minute);
     // Remaining seconds
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
     return { days, hours, minutes, seconds };
 }
 
@@ -67,6 +65,7 @@ function onTimerStart() {
         const startTime = new Date();
         const countdown = selectedDate - startTime;
         x.btnStart.disabled = true;
+        x.btnReset.disabled = false;
 
         if (countdown < 0) {
             clearInterval(timerId);
@@ -84,3 +83,6 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 }
 
 x.btnStart.addEventListener('click', onTimerStart);
+x.btnReset.addEventListener("click", () => {
+    onTimerStart.removeAttribute("disabled");
+})
