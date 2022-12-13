@@ -85,5 +85,10 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 
 x.btnStart.addEventListener('click', onTimerStart);
 x.btnReset.addEventListener("click", () => {
-    x.timerValue.reset();
+    x.btnReset.disabled = true;
+    x.timerDays.textContent = '00';
+    x.timerHours.textContent = '00';
+    x.timerMinutes.textContent = '00';
+    x.timerSeconds.textContent = '00';
+    clearInterval(timerId);
 });
